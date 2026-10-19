@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Quick Scan v3.7</title>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Quick Scan v3.8</title>
 <style>
 :root{font-family:system-ui,-apple-system,'Noto Sans Thai',sans-serif;background:#f0f7f3;color:#153c32}*{box-sizing:border-box}body{margin:0}header{background:#075f4b;color:white;padding:16px 18px}h1{font-size:21px;margin:0}header small{opacity:.85}main{max-width:620px;margin:auto;padding:14px}.card{background:white;border:1px solid #d4e5db;border-radius:16px;padding:14px;margin:12px 0}button,a.btn{font:inherit;border:0;background:#08795e;color:white;padding:12px 15px;border-radius:10px;font-weight:650;cursor:pointer;text-decoration:none;display:inline-block}button.secondary{background:#e0efe7;color:#155544}button:disabled{opacity:.45}input,select{font:inherit;padding:11px;border:1px solid #bdd5c9;border-radius:9px;width:100%;min-width:0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}#reader{width:100%;min-height:180px;border-radius:12px;overflow:hidden;background:#12251d}#reader video{width:100%!important;object-fit:cover}#status{background:#e6f4ed;padding:12px;border-radius:9px;line-height:1.5}#queue{padding-left:0;list-style:none;max-height:210px;overflow:auto}#queue li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #edf3ef;padding:8px 0;font-variant-numeric:tabular-nums}.muted{color:#62786c;font-size:13px}.ok{color:#086d4c}.err{color:#b72d26}.big{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:20px;padding:4px 10px;background:#e1f2e9;color:#0c684c}footer{font-size:12px;color:#6b8275;padding:10px 16px;text-align:center}
 </style></head><body>
-<header><h1>📷 MiniMart — Quick Scan v3.7</h1><small>เปิดกล้องหลังอัตโนมัติ • เล็งแล้วอ่านทันที</small></header>
+<header><h1>📷 MiniMart — Quick Scan v3.8</h1><small>เปิดกล้องหลังอัตโนมัติ • เล็งแล้วอ่านทันที</small></header>
 <main>
 <div class="card"><div id="status" role="status">พร้อมเปิดกล้อง</div><div id="reader" style="margin-top:12px"></div>
 <div class="row" style="margin-top:12px"><button id="start">▶ เปิดกล้องอีกครั้ง</button><button id="switch" class="secondary">🔄 เปลี่ยนกล้อง</button><button id="stop" class="secondary">■ หยุด</button><button id="torch" class="secondary" hidden>🔦 ไฟฉาย</button></div>
@@ -23,7 +23,7 @@
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const token=params.get('token')||'',target=params.get('target')||'posBarcode',returnUrl=params.get('returnUrl')||'',cartBase=params.get('cartBase')||'';
-const validTargets=['posBarcode','surveyBarcode','edBarcode','packBarcode','scannerTest'];
+const validTargets=['posBarcode','surveyBarcode','edBarcode','packBarcode','scannerTest','receiptBarcode'];
 const allowedReturn=(()=>{try{const u=new URL(returnUrl);return u.protocol==='https:'&&u.hostname==='script.google.com'&&/^\/macros\/s\/.+\/exec$/.test(u.pathname)}catch(_){return false}})();
 let scanner=null,scanning=false,starting=false,finishing=false,loadPromise=null,queue=[],seenAt=new Map(),serial=0,activeCameraId='',torchOn=false,cameraPreference='environment';
 function status(msg,err=false){$('status').textContent=msg;$('status').style.background=err?'#ffe8e5':'#e6f4ed';}
@@ -38,9 +38,9 @@ function addBarcode(value){const b=String(value||'').trim();if(!/^\d{6,14}$/.tes
  const item={barcode:b,id:String(++serial)+'-'+now,acked:false};queue.push(item);render();beep();try{navigator.vibrate?.(60)}catch(_){}
  status('อ่านได้: '+b+' • เล็งรายการถัดไปได้เลย');
  // Best effort instant delivery to the original POS tab. Mobile Safari may suspend it.
- if(window.opener&&token&&validTargets.includes(target))try{window.opener.postMessage({app:'MiniMartScanner',kind:'scan',token,target,barcode:b,id:item.id},'*')}catch(_){}
+ if(target!=='receiptBarcode'&&window.opener&&token&&validTargets.includes(target))try{window.opener.postMessage({app:'MiniMartScanner',kind:'scan',token,target,barcode:b,id:item.id},'*')}catch(_){}
  // Price survey / editing needs only one code: return automatically after scan.
- if(target!=='posBarcode'&&allowedReturn&&validTargets.includes(target)){setTimeout(()=>finishScan(),550)}
+ if(target!=='posBarcode'&&target!=='receiptBarcode'&&allowedReturn&&validTargets.includes(target)){setTimeout(()=>finishScan(),550)}
 }
 window.addEventListener('message',e=>{const d=e.data;if(!d||d.app!=='MiniMartScanner'||d.kind!=='ack'||d.token!==token||e.source!==window.opener)return;const item=queue.find(x=>x.id===d.id);if(item){item.acked=true;render()}});
 function loadLib(){if(window.Html5Qrcode)return Promise.resolve();if(loadPromise)return loadPromise;
