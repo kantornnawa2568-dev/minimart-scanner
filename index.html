@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Quick Scan v3.8.1</title>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Quick Scan v3.8.2</title>
 <style>
-:root{font-family:system-ui,-apple-system,'Noto Sans Thai',sans-serif;background:#f0f7f3;color:#153c32}*{box-sizing:border-box}body{margin:0}header{background:#075f4b;color:white;padding:16px 18px}h1{font-size:21px;margin:0}header small{opacity:.85}main{max-width:620px;margin:auto;padding:14px}.card{background:white;border:1px solid #d4e5db;border-radius:16px;padding:14px;margin:12px 0}button,a.btn{font:inherit;border:0;background:#08795e;color:white;padding:12px 15px;border-radius:10px;font-weight:650;cursor:pointer;text-decoration:none;display:inline-block}button.secondary{background:#e0efe7;color:#155544}button:disabled{opacity:.45}input,select{font:inherit;padding:11px;border:1px solid #bdd5c9;border-radius:9px;width:100%;min-width:0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}#reader{width:100%;min-height:180px;border-radius:12px;overflow:hidden;background:#12251d}#reader video{width:100%!important;object-fit:cover} .mode-btn{font-size:13px;padding:10px 8px;background:#e0efe7;color:#155544}.mode-btn.active{background:#08795e;color:white}.controls{padding:10px 0}.controls[hidden]{display:none}.tip{background:#fff8e8;border:1px solid #f1dfae;border-radius:9px;padding:10px;margin-top:10px;font-size:13px;color:#725413}#status{background:#e6f4ed;padding:12px;border-radius:9px;line-height:1.5}#queue{padding-left:0;list-style:none;max-height:210px;overflow:auto}#queue li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #edf3ef;padding:8px 0;font-variant-numeric:tabular-nums}.muted{color:#62786c;font-size:13px}.ok{color:#086d4c}.err{color:#b72d26}.big{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:20px;padding:4px 10px;background:#e1f2e9;color:#0c684c}footer{font-size:12px;color:#6b8275;padding:10px 16px;text-align:center}
+:root{font-family:system-ui,-apple-system,'Noto Sans Thai',sans-serif;background:#f0f7f3;color:#153c32}*{box-sizing:border-box}body{margin:0}header{background:#075f4b;color:white;padding:16px 18px}h1{font-size:21px;margin:0}header small{opacity:.85}main{max-width:620px;margin:auto;padding:14px}.card{background:white;border:1px solid #d4e5db;border-radius:16px;padding:14px;margin:12px 0}button,a.btn{font:inherit;border:0;background:#08795e;color:white;padding:12px 15px;border-radius:10px;font-weight:650;cursor:pointer;text-decoration:none;display:inline-block}button.secondary{background:#e0efe7;color:#155544}button:disabled{opacity:.45}input,select{font:inherit;padding:11px;border:1px solid #bdd5c9;border-radius:9px;width:100%;min-width:0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}#reader{width:100%;min-height:180px;border-radius:12px;overflow:hidden;background:#12251d}#reader video{width:100%!important;object-fit:cover} .controls{padding:10px 0}.controls[hidden]{display:none}.tip{background:#fff8e8;border:1px solid #f1dfae;border-radius:9px;padding:10px;margin-top:10px;font-size:13px;color:#725413}#status{background:#e6f4ed;padding:12px;border-radius:9px;line-height:1.5}#queue{padding-left:0;list-style:none;max-height:210px;overflow:auto}#queue li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #edf3ef;padding:8px 0;font-variant-numeric:tabular-nums}.muted{color:#62786c;font-size:13px}.ok{color:#086d4c}.err{color:#b72d26}.big{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:20px;padding:4px 10px;background:#e1f2e9;color:#0c684c}footer{font-size:12px;color:#6b8275;padding:10px 16px;text-align:center}
 </style></head><body>
-<header><h1>📷 MiniMart — Quick Scan v3.8.1</h1><small>เปิดกล้องหลังอัตโนมัติ • เล็งแล้วอ่านทันที</small></header>
+<header><h1>📷 MiniMart — Quick Scan v3.8.2</h1><small>เปิดกล้องหลังอัตโนมัติ • เล็งแล้วอ่านทันที</small></header>
 <main>
 <div class="card"><div id="status" role="status">พร้อมเปิดกล้อง</div><div id="reader" style="margin-top:12px"></div>
-<div class="controls"><b>โหมดสแกน</b><div class="row" style="margin-top:8px"><button type="button" class="mode-btn active" data-mode="normal">⚡ ทั่วไป</button><button type="button" class="mode-btn" data-mode="curved">🥤 ขวดโค้ง</button><button type="button" class="mode-btn" data-mode="glossy">✨ ซองสะท้อนแสง</button></div><div class="tip" id="modeTip">โหมดทั่วไป: เล็งให้เห็นเส้นบาร์โค้ดครบ และถือให้นิ่งสักครู่</div></div>
+<div class="tip" id="modeTip">⚡ สแกนอัตโนมัติ: อ่านได้ทั้งกล่อง ขวดโค้ง และซองสะท้อนแสง โดยไม่ต้องเลือกโหมด • หากมีแสงสะท้อน ให้เอียงสินค้าเล็กน้อย</div>
 <div class="controls" id="zoomPanel" hidden><label for="zoom">🔎 ซูมกล้อง <b id="zoomValue">1.0×</b></label><input id="zoom" type="range" min="1" max="3" step="0.1" value="1" aria-label="ซูมกล้อง"></div>
 <div class="row" style="margin-top:12px"><button id="start">▶ เปิดกล้องอีกครั้ง</button><button id="switch" class="secondary">🔄 เปลี่ยนกล้อง</button><button id="stop" class="secondary">■ หยุด</button><button id="torch" class="secondary" hidden>🔦 ไฟฉาย</button></div>
 <p class="muted">เล็งให้เห็นบาร์โค้ด EAN/UPC หรือ QR เต็มแถบ อ่านสำเร็จจะมีเสียง/สั่น และอ่านรายการถัดไปได้ทันที หากเป็นซองมันวาว ให้เอียงซองหนีแสงสะท้อนเล็กน้อย</p>
@@ -16,9 +16,9 @@
 <div class="row" style="margin-top:12px"><input id="manual" inputmode="numeric" placeholder="กรอกรหัสเอง เช่น 8858894100472"><button id="manualAdd" style="flex:0 0 auto">+ เพิ่ม</button></div>
 <h3>รหัสที่อ่านได้</h3><ul id="queue"><li class="muted">ยังไม่มีรายการ</li></ul>
 <div class="row"><button id="send" style="width:100%;font-size:18px;padding:16px">✓ เสร็จสิ้น → กลับ MiniMart</button></div><details style="margin-top:12px"><summary class="muted">เครื่องมือเพิ่มเติม</summary><div class="row" style="margin-top:8px"><button id="copy" class="secondary">คัดลอก</button><button id="clear" class="secondary">ล้างรายการ</button></div></details>
-<p class="muted">สแกนหลายชิ้นได้ต่อเนื่อง กด “เสร็จสิ้น” ครั้งเดียวเพื่อกลับ MiniMart ระบบจะเพิ่มรหัสเข้าตะกร้าโดยอัตโนมัติ (ยังไม่ตัดสต๊อก)</p>
+<p class="muted">สแกนหลายชิ้นต่อเนื่อง แล้วกด “เสร็จสิ้น” เพื่อกลับหน้า MiniMart เดิมทันทีเมื่อเชื่อมต่อได้ • หาก Safari พักหน้าเดิม ระบบจะส่งข้อมูลผ่าน URL สำรอง (ยังไม่ตัดสต๊อก)</p>
 </div>
-<div class="card"><b>ข้อควรทราบ</b><p class="muted">ใช้ HTTPS ใน Safari โดยตรง และอนุญาตกล้องเมื่อถูกถาม โหมดขวดโค้ง/ซองสะท้อนแสงช่วยเพิ่มโอกาสอ่าน แต่ไม่รับประกันทุกมุม; การซูม โฟกัส และชดเชยแสงขึ้นอยู่กับการรองรับของกล้อง หากเปิดจาก LINE หรือ iframe อาจถูกจำกัดสิทธิ์ สแกนได้สูงสุด 50 รายการต่อการส่งกลับหนึ่งครั้ง ภาพจากกล้องประมวลผลบนอุปกรณ์</p></div>
+<div class="card"><b>ข้อควรทราบ</b><p class="muted">ใช้ HTTPS ใน Safari โดยตรง และอนุญาตกล้องเมื่อถูกถาม ระบบสแกนอัตโนมัติช่วยอ่านหลายตำแหน่ง แต่ไม่รับประกันทุกมุม; การซูม โฟกัส และชดเชยแสงขึ้นอยู่กับการรองรับของกล้อง หากเปิดจาก LINE หรือ iframe อาจถูกจำกัดสิทธิ์ สแกนได้สูงสุด 50 รายการต่อการส่งกลับหนึ่งครั้ง ภาพจากกล้องประมวลผลบนอุปกรณ์</p></div>
 </main><footer>MiniMart Scanner • Static HTTPS • No API keys</footer>
 <script>
 'use strict';
@@ -27,21 +27,24 @@ const params=new URLSearchParams(location.search);
 const token=params.get('token')||'',target=params.get('target')||'posBarcode',returnUrl=params.get('returnUrl')||'',cartBase=params.get('cartBase')||'';
 const validTargets=['posBarcode','surveyBarcode','edBarcode','packBarcode','scannerTest','receiptBarcode'];
 const allowedReturn=(()=>{try{const u=new URL(returnUrl);return u.protocol==='https:'&&u.hostname==='script.google.com'&&/^\/macros\/s\/.+\/exec$/.test(u.pathname)}catch(_){return false}})();
-let scanner=null,scanning=false,starting=false,finishing=false,loadPromise=null,queue=[],seenAt=new Map(),serial=0,activeCameraId='',torchOn=false,cameraPreference='environment',scanMode='normal',zoomTimer=null;
-const modeTips={normal:'โหมดทั่วไป: เหมาะกับกล่องและบาร์โค้ดเรียบ เล็งให้เห็นเส้นครบ',curved:'โหมดขวดโค้ง: อ่านจากพื้นที่ภาพกว้างขึ้น หมุนขวดช้า ๆ ให้เส้นตรงที่สุด และอย่าจ่อกล้องใกล้เกินไป',glossy:'โหมดซองสะท้อนแสง: ใช้พื้นที่อ่านกว้าง ลดแสงกล้องเมื่อรองรับ และเอียงซองหลบแสงสะท้อน อย่าเปิดไฟฉายหากเกิดจุดขาวบนบาร์โค้ด'};
+let scanner=null,scanning=false,starting=false,finishing=false,loadPromise=null,queue=[],seenAt=new Map(),serial=0,activeCameraId='',torchOn=false,cameraPreference='environment',zoomTimer=null;
 function status(msg,err=false){$('status').textContent=msg;$('status').style.background=err?'#ffe8e5':'#e6f4ed';}
 function render(){ $('count').textContent=queue.length;$('last').textContent=queue.length?queue[queue.length-1].barcode:'—';$('queue').replaceChildren();
  if(!queue.length){const li=document.createElement('li');li.textContent='ยังไม่มีรายการ';$('queue').appendChild(li);return}
  queue.slice().reverse().forEach((x,i)=>{const li=document.createElement('li');const a=document.createElement('span');a.textContent=x.barcode;const b=document.createElement('small');b.textContent=x.acked?'ส่งแล้ว':'รอส่ง';b.className=x.acked?'ok':'muted';li.append(a,b);$('queue').appendChild(li)});
 }
 function beep(){if($('sound').value==='no')return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const ctx=new C(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.frequency.value=900;gain.gain.value=.09;osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.09);osc.onended=()=>ctx.close()}catch(_){}}
+function sendToExistingTab(item){
+ if(!window.opener||!token||!validTargets.includes(target))return;
+ try{window.opener.postMessage({app:'MiniMartScanner',kind:'scan',token,target,barcode:item.barcode,id:item.id},'*')}catch(_){}
+}
 function addBarcode(value){const b=String(value||'').trim();if(!/^\d{6,14}$/.test(b)){status('อ่านรหัสแล้ว แต่ MiniMart รองรับบาร์โค้ดตัวเลข 6–14 หลักเท่านั้น',true);return}
  const now=Date.now(),prior=seenAt.get(b)||0;if(now-prior<Number($('cooldown').value))return;
  seenAt.set(b,now);if(queue.length>=50){status('ครบ 50 รายการ กรุณาส่งกลับ MiniMart ก่อน',true);return}
  const item={barcode:b,id:String(++serial)+'-'+now,acked:false};queue.push(item);render();beep();try{navigator.vibrate?.(60)}catch(_){}
  status('อ่านได้: '+b+' • เล็งรายการถัดไปได้เลย');
  // Best effort instant delivery to the original POS tab. Mobile Safari may suspend it.
- if(target!=='receiptBarcode'&&window.opener&&token&&validTargets.includes(target))try{window.opener.postMessage({app:'MiniMartScanner',kind:'scan',token,target,barcode:b,id:item.id},'*')}catch(_){}
+ sendToExistingTab(item);
  // Price survey / editing needs only one code: return automatically after scan.
  if(target!=='posBarcode'&&target!=='receiptBarcode'&&allowedReturn&&validTargets.includes(target)){setTimeout(()=>finishScan(),550)}
 }
@@ -55,10 +58,9 @@ async function start(){
   if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)throw Error('ต้องเปิดผ่าน HTTPS ใน Safari โดยตรง');
   await loadLib();
   scanner=new Html5Qrcode('reader',{formatsToSupport:[Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,Html5QrcodeSupportedFormats.UPC_A,Html5QrcodeSupportedFormats.UPC_E,Html5QrcodeSupportedFormats.CODE_128,Html5QrcodeSupportedFormats.CODE_39,Html5QrcodeSupportedFormats.ITF,Html5QrcodeSupportedFormats.QR_CODE],verbose:false});
-  const config={fps:scanMode==='normal'?18:15,disableFlip:true};
-  // Curved and reflective packages may have barcodes outside a narrow central region.
-  // Scan the entire camera frame in those modes, accepting the extra CPU cost.
-  if(scanMode==='normal')config.qrbox=(w,h)=>({width:Math.max(180,Math.min(Math.round(w*.9),450)),height:Math.max(110,Math.min(Math.round(h*.5),240))});
+  // Automatic full-frame reading: no mode changes or camera restarts.
+  // Helps when curved/reflective codes sit outside a narrow central box.
+  const config={fps:16,disableFlip:true};
   try{
    await scanner.start({facingMode:cameraPreference},config,addBarcode,()=>{});
   }catch(firstError){
@@ -85,10 +87,9 @@ async function configureCamera(){
  $('zoomPanel').hidden=!(caps.zoom&&Number.isFinite(caps.zoom.min)&&Number.isFinite(caps.zoom.max)&&caps.zoom.max>caps.zoom.min);
  if(!$('zoomPanel').hidden){const slider=$('zoom');slider.min=String(caps.zoom.min);slider.max=String(Math.min(caps.zoom.max,5));slider.step=String(caps.zoom.step||.1);const current=scanner.getRunningTrackSettings?.().zoom||caps.zoom.min;slider.value=String(Math.min(Number(slider.max),Math.max(Number(slider.min),current)));$('zoomValue').textContent=Number(slider.value).toFixed(1)+'×'}
  if(Array.isArray(caps.focusMode)&&caps.focusMode.includes('continuous'))await applyCameraAdvanced({focusMode:'continuous'});
- if(scanMode==='glossy'&&caps.exposureCompensation){const e=caps.exposureCompensation;const min=Number(e.min),max=Number(e.max);if(Number.isFinite(min)&&Number.isFinite(max)&&min<0){const desired=Math.max(min,Math.min(max,-.5));await applyCameraAdvanced({exposureCompensation:desired})}}
+ // Do not force low exposure: it can make ordinary labels too dark.
+ // Users can angle glossy packages away from the light.
 }
-async function setScanMode(mode){if(!modeTips[mode]||scanMode===mode)return;scanMode=mode;$('modeTip').textContent=modeTips[mode];document.querySelectorAll('[data-mode]').forEach(b=>{const active=b.dataset.mode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});if(scanning){await stop();await start()}else if(!starting)status('เลือกโหมดแล้ว • กดเปิดกล้องเพื่อเริ่มสแกน')}
-document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setScanMode(b.dataset.mode)));
 $('zoom').addEventListener('input',e=>{const value=Number(e.target.value);$('zoomValue').textContent=value.toFixed(1)+'×';clearTimeout(zoomTimer);zoomTimer=setTimeout(()=>applyCameraAdvanced({zoom:value}),100)});
 $('start').addEventListener('click',start);$('stop').addEventListener('click',stop);$('switch').addEventListener('click',async()=>{cameraPreference=cameraPreference==='environment'?'user':'environment';await stop();await start()});
 $('torch').addEventListener('click',async()=>{if(!scanner)return;const desired=!torchOn;if(await applyCameraAdvanced({torch:desired})){torchOn=desired;status(torchOn?'เปิดไฟฉายแล้ว':'ปิดไฟฉายแล้ว')}else{$('torch').hidden=true;status('อุปกรณ์นี้ไม่รองรับไฟฉายผ่านเว็บ')}});
@@ -96,16 +97,39 @@ $('manualAdd').addEventListener('click',()=>{addBarcode($('manual').value);$('ma
 $('manual').addEventListener('keydown',e=>{if(e.key==='Enter'){$('manualAdd').click()}});
 $('clear').addEventListener('click',()=>{if(!confirm('ล้างรายการที่สแกนทั้งหมด?'))return;queue=[];seenAt.clear();render();status('ล้างรายการแล้ว')});
 $('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(queue.map(x=>x.barcode).join('\n'));status('คัดลอกรหัสแล้ว')}catch(_){status('คัดลอกอัตโนมัติไม่ได้ กรุณาคัดลอกด้วยตนเอง',true)}});
-function finishScan(){
+async function finishScan(){
  if(finishing)return;
  if(!allowedReturn||!validTargets.includes(target)){status('URL สำหรับกลับ MiniMart ไม่ถูกต้อง กรุณาเปิดจากปุ่มใน MiniMart',true);return}
  if(!queue.length){status('ยังไม่มีรหัสที่จะส่งกลับ',true);return}
- // Do not double-import scans that the POS already acknowledged.
- // If a new POS tab is opened, rebuild the entire scan batch from the original cart snapshot.
- // Do not omit ACKed scans, otherwise a partial ACK would silently lose items.
+ finishing=true;$('send').disabled=true;
+ status('กำลังกลับ MiniMart...');
+ // FAST PATH: existing POS tab already received each code and ACKed it.
+ // Retry unacknowledged items once: Safari may briefly pause the original tab.
+ if(window.opener&&token){
+  queue.filter(x=>!x.acked).forEach(sendToExistingTab);
+  await new Promise(resolve=>setTimeout(resolve,650));
+  if(queue.every(x=>x.acked)){
+   status('ส่งข้อมูลครบแล้ว • กำลังกลับไปหน้า MiniMart เดิม (ไม่ต้องโหลดใหม่)');
+   try{window.opener.focus()}catch(_){}
+   try{window.close()}catch(_){}
+   // iOS may not permit programmatic tab closing; keep a usable manual fallback.
+   $('send').disabled=false;
+   $('send').textContent='↩ กลับ MiniMart (หน้าเดิม)';
+   $('send').onclick=()=>{try{window.opener.focus();window.close()}catch(_){};
+     status('ข้อมูลส่งครบแล้ว กรุณาแตะแท็บ MiniMart เดิมใน Safari ไม่ต้องกดส่งซ้ำ')};
+   finishing=false;
+   return;
+  }
+ }
+ // FALLBACK: opener absent / no ACK. Reloading Apps Script is slower but
+ // preserves the complete batch, even when Safari suspended the old tab.
  const pending=queue.map(x=>x.barcode);
- finishing=true;const url=new URL(returnUrl);if(target==='posBarcode'&&cartBase)url.searchParams.set('scanCartBase',cartBase);url.searchParams.set('scanTarget',target);url.searchParams.set('scanBatch',pending.join(','));url.searchParams.set('scanNonce',crypto.randomUUID?crypto.randomUUID():Date.now().toString(36));
- // Navigate THIS tab, so it also works if Safari removed window.opener.
+ const url=new URL(returnUrl);
+ if(target==='posBarcode'&&cartBase)url.searchParams.set('scanCartBase',cartBase);
+ url.searchParams.set('scanTarget',target);
+ url.searchParams.set('scanBatch',pending.join(','));
+ url.searchParams.set('scanNonce',crypto.randomUUID?crypto.randomUUID():Date.now().toString(36));
+ status('Safari ไม่สามารถติดต่อหน้าเดิมได้ • กำลังเปิด MiniMart เพื่อรักษารายการที่สแกน');
  location.replace(url.toString());
 }
 $('send').addEventListener('click',finishScan);
