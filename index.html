@@ -1,13 +1,15 @@
 <!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Quick Scan v3.8</title>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Quick Scan v3.8.1</title>
 <style>
-:root{font-family:system-ui,-apple-system,'Noto Sans Thai',sans-serif;background:#f0f7f3;color:#153c32}*{box-sizing:border-box}body{margin:0}header{background:#075f4b;color:white;padding:16px 18px}h1{font-size:21px;margin:0}header small{opacity:.85}main{max-width:620px;margin:auto;padding:14px}.card{background:white;border:1px solid #d4e5db;border-radius:16px;padding:14px;margin:12px 0}button,a.btn{font:inherit;border:0;background:#08795e;color:white;padding:12px 15px;border-radius:10px;font-weight:650;cursor:pointer;text-decoration:none;display:inline-block}button.secondary{background:#e0efe7;color:#155544}button:disabled{opacity:.45}input,select{font:inherit;padding:11px;border:1px solid #bdd5c9;border-radius:9px;width:100%;min-width:0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}#reader{width:100%;min-height:180px;border-radius:12px;overflow:hidden;background:#12251d}#reader video{width:100%!important;object-fit:cover}#status{background:#e6f4ed;padding:12px;border-radius:9px;line-height:1.5}#queue{padding-left:0;list-style:none;max-height:210px;overflow:auto}#queue li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #edf3ef;padding:8px 0;font-variant-numeric:tabular-nums}.muted{color:#62786c;font-size:13px}.ok{color:#086d4c}.err{color:#b72d26}.big{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:20px;padding:4px 10px;background:#e1f2e9;color:#0c684c}footer{font-size:12px;color:#6b8275;padding:10px 16px;text-align:center}
+:root{font-family:system-ui,-apple-system,'Noto Sans Thai',sans-serif;background:#f0f7f3;color:#153c32}*{box-sizing:border-box}body{margin:0}header{background:#075f4b;color:white;padding:16px 18px}h1{font-size:21px;margin:0}header small{opacity:.85}main{max-width:620px;margin:auto;padding:14px}.card{background:white;border:1px solid #d4e5db;border-radius:16px;padding:14px;margin:12px 0}button,a.btn{font:inherit;border:0;background:#08795e;color:white;padding:12px 15px;border-radius:10px;font-weight:650;cursor:pointer;text-decoration:none;display:inline-block}button.secondary{background:#e0efe7;color:#155544}button:disabled{opacity:.45}input,select{font:inherit;padding:11px;border:1px solid #bdd5c9;border-radius:9px;width:100%;min-width:0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}#reader{width:100%;min-height:180px;border-radius:12px;overflow:hidden;background:#12251d}#reader video{width:100%!important;object-fit:cover} .mode-btn{font-size:13px;padding:10px 8px;background:#e0efe7;color:#155544}.mode-btn.active{background:#08795e;color:white}.controls{padding:10px 0}.controls[hidden]{display:none}.tip{background:#fff8e8;border:1px solid #f1dfae;border-radius:9px;padding:10px;margin-top:10px;font-size:13px;color:#725413}#status{background:#e6f4ed;padding:12px;border-radius:9px;line-height:1.5}#queue{padding-left:0;list-style:none;max-height:210px;overflow:auto}#queue li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #edf3ef;padding:8px 0;font-variant-numeric:tabular-nums}.muted{color:#62786c;font-size:13px}.ok{color:#086d4c}.err{color:#b72d26}.big{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:20px;padding:4px 10px;background:#e1f2e9;color:#0c684c}footer{font-size:12px;color:#6b8275;padding:10px 16px;text-align:center}
 </style></head><body>
-<header><h1>📷 MiniMart — Quick Scan v3.8</h1><small>เปิดกล้องหลังอัตโนมัติ • เล็งแล้วอ่านทันที</small></header>
+<header><h1>📷 MiniMart — Quick Scan v3.8.1</h1><small>เปิดกล้องหลังอัตโนมัติ • เล็งแล้วอ่านทันที</small></header>
 <main>
 <div class="card"><div id="status" role="status">พร้อมเปิดกล้อง</div><div id="reader" style="margin-top:12px"></div>
+<div class="controls"><b>โหมดสแกน</b><div class="row" style="margin-top:8px"><button type="button" class="mode-btn active" data-mode="normal">⚡ ทั่วไป</button><button type="button" class="mode-btn" data-mode="curved">🥤 ขวดโค้ง</button><button type="button" class="mode-btn" data-mode="glossy">✨ ซองสะท้อนแสง</button></div><div class="tip" id="modeTip">โหมดทั่วไป: เล็งให้เห็นเส้นบาร์โค้ดครบ และถือให้นิ่งสักครู่</div></div>
+<div class="controls" id="zoomPanel" hidden><label for="zoom">🔎 ซูมกล้อง <b id="zoomValue">1.0×</b></label><input id="zoom" type="range" min="1" max="3" step="0.1" value="1" aria-label="ซูมกล้อง"></div>
 <div class="row" style="margin-top:12px"><button id="start">▶ เปิดกล้องอีกครั้ง</button><button id="switch" class="secondary">🔄 เปลี่ยนกล้อง</button><button id="stop" class="secondary">■ หยุด</button><button id="torch" class="secondary" hidden>🔦 ไฟฉาย</button></div>
-<p class="muted">เล็งให้เห็นบาร์โค้ด EAN/UPC หรือ QR เต็มแถบ อ่านสำเร็จจะมีเสียง/สั่น และอ่านรายการถัดไปได้ทันที</p>
+<p class="muted">เล็งให้เห็นบาร์โค้ด EAN/UPC หรือ QR เต็มแถบ อ่านสำเร็จจะมีเสียง/สั่น และอ่านรายการถัดไปได้ทันที หากเป็นซองมันวาว ให้เอียงซองหนีแสงสะท้อนเล็กน้อย</p>
 <div class="row"><label style="flex:2">เว้นระยะรหัสเดิม (วินาที)<select id="cooldown"><option value="1800">1.8 — แนะนำ</option><option value="3000">3</option><option value="5000">5</option></select></label><label style="flex:1">เสียง<select id="sound"><option value="yes">เปิด</option><option value="no">ปิด</option></select></label></div>
 </div>
 <div class="card"><div class="row"><div><div class="muted">อ่านล่าสุด</div><div id="last" class="big">—</div></div><div style="text-align:right"><span class="pill">สะสม <b id="count">0</b> รายการ</span></div></div>
@@ -16,7 +18,7 @@
 <div class="row"><button id="send" style="width:100%;font-size:18px;padding:16px">✓ เสร็จสิ้น → กลับ MiniMart</button></div><details style="margin-top:12px"><summary class="muted">เครื่องมือเพิ่มเติม</summary><div class="row" style="margin-top:8px"><button id="copy" class="secondary">คัดลอก</button><button id="clear" class="secondary">ล้างรายการ</button></div></details>
 <p class="muted">สแกนหลายชิ้นได้ต่อเนื่อง กด “เสร็จสิ้น” ครั้งเดียวเพื่อกลับ MiniMart ระบบจะเพิ่มรหัสเข้าตะกร้าโดยอัตโนมัติ (ยังไม่ตัดสต๊อก)</p>
 </div>
-<div class="card"><b>ข้อควรทราบ</b><p class="muted">ใช้ HTTPS ใน Safari โดยตรง และอนุญาตกล้องเมื่อถูกถาม หากเปิดจาก LINE หรือ iframe อาจถูกจำกัดสิทธิ์ สแกนได้สูงสุด 50 รายการต่อการส่งกลับหนึ่งครั้ง ภาพจากกล้องประมวลผลบนอุปกรณ์</p></div>
+<div class="card"><b>ข้อควรทราบ</b><p class="muted">ใช้ HTTPS ใน Safari โดยตรง และอนุญาตกล้องเมื่อถูกถาม โหมดขวดโค้ง/ซองสะท้อนแสงช่วยเพิ่มโอกาสอ่าน แต่ไม่รับประกันทุกมุม; การซูม โฟกัส และชดเชยแสงขึ้นอยู่กับการรองรับของกล้อง หากเปิดจาก LINE หรือ iframe อาจถูกจำกัดสิทธิ์ สแกนได้สูงสุด 50 รายการต่อการส่งกลับหนึ่งครั้ง ภาพจากกล้องประมวลผลบนอุปกรณ์</p></div>
 </main><footer>MiniMart Scanner • Static HTTPS • No API keys</footer>
 <script>
 'use strict';
@@ -25,7 +27,8 @@ const params=new URLSearchParams(location.search);
 const token=params.get('token')||'',target=params.get('target')||'posBarcode',returnUrl=params.get('returnUrl')||'',cartBase=params.get('cartBase')||'';
 const validTargets=['posBarcode','surveyBarcode','edBarcode','packBarcode','scannerTest','receiptBarcode'];
 const allowedReturn=(()=>{try{const u=new URL(returnUrl);return u.protocol==='https:'&&u.hostname==='script.google.com'&&/^\/macros\/s\/.+\/exec$/.test(u.pathname)}catch(_){return false}})();
-let scanner=null,scanning=false,starting=false,finishing=false,loadPromise=null,queue=[],seenAt=new Map(),serial=0,activeCameraId='',torchOn=false,cameraPreference='environment';
+let scanner=null,scanning=false,starting=false,finishing=false,loadPromise=null,queue=[],seenAt=new Map(),serial=0,activeCameraId='',torchOn=false,cameraPreference='environment',scanMode='normal',zoomTimer=null;
+const modeTips={normal:'โหมดทั่วไป: เหมาะกับกล่องและบาร์โค้ดเรียบ เล็งให้เห็นเส้นครบ',curved:'โหมดขวดโค้ง: อ่านจากพื้นที่ภาพกว้างขึ้น หมุนขวดช้า ๆ ให้เส้นตรงที่สุด และอย่าจ่อกล้องใกล้เกินไป',glossy:'โหมดซองสะท้อนแสง: ใช้พื้นที่อ่านกว้าง ลดแสงกล้องเมื่อรองรับ และเอียงซองหลบแสงสะท้อน อย่าเปิดไฟฉายหากเกิดจุดขาวบนบาร์โค้ด'};
 function status(msg,err=false){$('status').textContent=msg;$('status').style.background=err?'#ffe8e5':'#e6f4ed';}
 function render(){ $('count').textContent=queue.length;$('last').textContent=queue.length?queue[queue.length-1].barcode:'—';$('queue').replaceChildren();
  if(!queue.length){const li=document.createElement('li');li.textContent='ยังไม่มีรายการ';$('queue').appendChild(li);return}
@@ -52,7 +55,10 @@ async function start(){
   if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)throw Error('ต้องเปิดผ่าน HTTPS ใน Safari โดยตรง');
   await loadLib();
   scanner=new Html5Qrcode('reader',{formatsToSupport:[Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,Html5QrcodeSupportedFormats.UPC_A,Html5QrcodeSupportedFormats.UPC_E,Html5QrcodeSupportedFormats.CODE_128,Html5QrcodeSupportedFormats.CODE_39,Html5QrcodeSupportedFormats.ITF,Html5QrcodeSupportedFormats.QR_CODE],verbose:false});
-  const config={fps:18,qrbox:(w,h)=>({width:Math.max(180,Math.min(Math.round(w*.9),450)),height:Math.max(110,Math.min(Math.round(h*.5),240))}),disableFlip:true};
+  const config={fps:scanMode==='normal'?18:15,disableFlip:true};
+  // Curved and reflective packages may have barcodes outside a narrow central region.
+  // Scan the entire camera frame in those modes, accepting the extra CPU cost.
+  if(scanMode==='normal')config.qrbox=(w,h)=>({width:Math.max(180,Math.min(Math.round(w*.9),450)),height:Math.max(110,Math.min(Math.round(h*.5),240))});
   try{
    await scanner.start({facingMode:cameraPreference},config,addBarcode,()=>{});
   }catch(firstError){
@@ -65,13 +71,27 @@ async function start(){
    await scanner.start(choice.id,config,addBarcode,()=>{});
   }
   scanning=true;status('กล้องพร้อม • สแกนต่อเนื่องได้เลย');
-  $('torch').hidden=typeof scanner.applyVideoConstraints!=='function';
+  await configureCamera();
  }catch(e){status('เปิดกล้องไม่ได้: '+(e?.message||e)+' • กดเปิดกล้องอีกครั้ง หรืออนุญาตกล้องใน Safari',true);if(scanner){try{scanner.clear()}catch(_){}}scanner=null}
  finally{starting=false;$('start').disabled=false}
 }
-async function stop(){if(!scanner)return;try{if(scanning)await scanner.stop();scanner.clear()}catch(e){console.warn(e)}scanner=null;scanning=false;$('torch').hidden=true;status('หยุดกล้องแล้ว')}
+async function stop(){if(!scanner)return;try{if(scanning)await scanner.stop();scanner.clear()}catch(e){console.warn(e)}scanner=null;scanning=false;torchOn=false;$('torch').hidden=true;$('zoomPanel').hidden=true;status('หยุดกล้องแล้ว')}
+
+function cameraCapabilities(){try{return scanner?.getRunningTrackCapabilities?.()||{}}catch(_){return {}}}
+async function applyCameraAdvanced(settings){if(!scanner||!scanning||typeof scanner.applyVideoConstraints!=='function')return false;try{await scanner.applyVideoConstraints({advanced:[settings]});return true}catch(_){return false}}
+async function configureCamera(){
+ const caps=cameraCapabilities();
+ $('torch').hidden=!(caps.torch===true && typeof scanner.applyVideoConstraints==='function');
+ $('zoomPanel').hidden=!(caps.zoom&&Number.isFinite(caps.zoom.min)&&Number.isFinite(caps.zoom.max)&&caps.zoom.max>caps.zoom.min);
+ if(!$('zoomPanel').hidden){const slider=$('zoom');slider.min=String(caps.zoom.min);slider.max=String(Math.min(caps.zoom.max,5));slider.step=String(caps.zoom.step||.1);const current=scanner.getRunningTrackSettings?.().zoom||caps.zoom.min;slider.value=String(Math.min(Number(slider.max),Math.max(Number(slider.min),current)));$('zoomValue').textContent=Number(slider.value).toFixed(1)+'×'}
+ if(Array.isArray(caps.focusMode)&&caps.focusMode.includes('continuous'))await applyCameraAdvanced({focusMode:'continuous'});
+ if(scanMode==='glossy'&&caps.exposureCompensation){const e=caps.exposureCompensation;const min=Number(e.min),max=Number(e.max);if(Number.isFinite(min)&&Number.isFinite(max)&&min<0){const desired=Math.max(min,Math.min(max,-.5));await applyCameraAdvanced({exposureCompensation:desired})}}
+}
+async function setScanMode(mode){if(!modeTips[mode]||scanMode===mode)return;scanMode=mode;$('modeTip').textContent=modeTips[mode];document.querySelectorAll('[data-mode]').forEach(b=>{const active=b.dataset.mode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});if(scanning){await stop();await start()}else if(!starting)status('เลือกโหมดแล้ว • กดเปิดกล้องเพื่อเริ่มสแกน')}
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setScanMode(b.dataset.mode)));
+$('zoom').addEventListener('input',e=>{const value=Number(e.target.value);$('zoomValue').textContent=value.toFixed(1)+'×';clearTimeout(zoomTimer);zoomTimer=setTimeout(()=>applyCameraAdvanced({zoom:value}),100)});
 $('start').addEventListener('click',start);$('stop').addEventListener('click',stop);$('switch').addEventListener('click',async()=>{cameraPreference=cameraPreference==='environment'?'user':'environment';await stop();await start()});
-$('torch').addEventListener('click',async()=>{if(!scanner)return;try{torchOn=!torchOn;await scanner.applyVideoConstraints({advanced:[{torch:torchOn}]});status(torchOn?'เปิดไฟฉายแล้ว':'ปิดไฟฉายแล้ว')}catch(_){$('torch').hidden=true;status('อุปกรณ์นี้ไม่รองรับไฟฉายผ่านเว็บ')}});
+$('torch').addEventListener('click',async()=>{if(!scanner)return;const desired=!torchOn;if(await applyCameraAdvanced({torch:desired})){torchOn=desired;status(torchOn?'เปิดไฟฉายแล้ว':'ปิดไฟฉายแล้ว')}else{$('torch').hidden=true;status('อุปกรณ์นี้ไม่รองรับไฟฉายผ่านเว็บ')}});
 $('manualAdd').addEventListener('click',()=>{addBarcode($('manual').value);$('manual').value=''});
 $('manual').addEventListener('keydown',e=>{if(e.key==='Enter'){$('manualAdd').click()}});
 $('clear').addEventListener('click',()=>{if(!confirm('ล้างรายการที่สแกนทั้งหมด?'))return;queue=[];seenAt.clear();render();status('ล้างรายการแล้ว')});
