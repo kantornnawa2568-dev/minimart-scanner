@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Scanner</title>
+<style>
+:root{font-family:system-ui,-apple-system,'Noto Sans Thai',sans-serif;background:#f0f7f3;color:#153c32}*{box-sizing:border-box}body{margin:0}header{background:#075f4b;color:white;padding:16px 18px}h1{font-size:21px;margin:0}header small{opacity:.85}main{max-width:620px;margin:auto;padding:14px}.card{background:white;border:1px solid #d4e5db;border-radius:16px;padding:14px;margin:12px 0}button,a.btn{font:inherit;border:0;background:#08795e;color:white;padding:12px 15px;border-radius:10px;font-weight:650;cursor:pointer;text-decoration:none;display:inline-block}button.secondary{background:#e0efe7;color:#155544}button:disabled{opacity:.45}input,select{font:inherit;padding:11px;border:1px solid #bdd5c9;border-radius:9px;width:100%;min-width:0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}#reader{width:100%;min-height:180px;border-radius:12px;overflow:hidden;background:#12251d}#reader video{width:100%!important;object-fit:cover}#status{background:#e6f4ed;padding:12px;border-radius:9px;line-height:1.5}#queue{padding-left:0;list-style:none;max-height:210px;overflow:auto}#queue li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #edf3ef;padding:8px 0;font-variant-numeric:tabular-nums}.muted{color:#62786c;font-size:13px}.ok{color:#086d4c}.err{color:#b72d26}.big{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:20px;padding:4px 10px;background:#e1f2e9;color:#0c684c}footer{font-size:12px;color:#6b8275;padding:10px 16px;text-align:center}
+</style></head><body>
+<header><h1>📷 MiniMart — สแกนต่อเนื่อง</h1><small>กล้อง Safari โดยตรง • ไม่ส่งรูปภาพไปยังเซิร์ฟเวอร์</small></header>
+<main>
+<div class="card"><div id="status" role="status">พร้อมเปิดกล้อง</div><div id="reader" style="margin-top:12px"></div>
+<div class="row" style="margin-top:12px"><button id="start">▶ เปิดกล้อง</button><button id="stop" class="secondary">■ หยุด</button><button id="torch" class="secondary" hidden>🔦 ไฟฉาย</button></div>
+<p class="muted">เล็งให้เห็นบาร์โค้ด EAN/UPC หรือ QR เต็มแถบ อ่านสำเร็จจะมีเสียง/สั่น และอ่านรายการถัดไปได้ทันที</p>
+<div class="row"><label style="flex:2">เว้นระยะรหัสเดิม (วินาที)<select id="cooldown"><option value="1800">1.8 — แนะนำ</option><option value="3000">3</option><option value="5000">5</option></select></label><label style="flex:1">เสียง<select id="sound"><option value="yes">เปิด</option><option value="no">ปิด</option></select></label></div>
+</div>
+<div class="card"><div class="row"><div><div class="muted">อ่านล่าสุด</div><div id="last" class="big">—</div></div><div style="text-align:right"><span class="pill">สะสม <b id="count">0</b> รายการ</span></div></div>
+<div class="row" style="margin-top:12px"><input id="manual" inputmode="numeric" placeholder="กรอกรหัสเอง เช่น 8858894100472"><button id="manualAdd" style="flex:0 0 auto">+ เพิ่ม</button></div>
+<h3>รหัสที่อ่านได้</h3><ul id="queue"><li class="muted">ยังไม่มีรายการ</li></ul>
+<div class="row"><button id="send" style="width:100%">📤 ส่งรหัสกลับ MiniMart</button><button id="copy" class="secondary">คัดลอก</button><button id="clear" class="secondary">ล้าง</button></div>
+<p class="muted">ถ้ากลับ MiniMart อัตโนมัติไม่ได้ ให้กด “ส่งรหัสกลับ MiniMart” เพื่อเปิดหน้า POS พร้อมรายการที่สแกนไว้ ระบบจะให้ยืนยันก่อนเพิ่มเข้าตะกร้า</p>
+</div>
+<div class="card"><b>ข้อควรทราบ</b><p class="muted">ใช้ HTTPS ใน Safari โดยตรง และอนุญาตกล้องเมื่อถูกถาม หากเปิดจาก LINE หรือ iframe อาจถูกจำกัดสิทธิ์ สแกนได้สูงสุด 50 รายการต่อการส่งกลับหนึ่งครั้ง ภาพจากกล้องประมวลผลบนอุปกรณ์</p></div>
+</main><footer>MiniMart Scanner • Static HTTPS • No API keys</footer>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const token=params.get('token')||'',target=params.get('target')||'posBarcode',returnUrl=params.get('returnUrl')||'',cartBase=params.get('cartBase')||'';
+const validTargets=['posBarcode','surveyBarcode','edBarcode','packBarcode','scannerTest'];
+const allowedReturn=(()=>{try{const u=new URL(returnUrl);return u.protocol==='https:'&&u.hostname==='script.google.com'&&/^\/macros\/s\/.+\/exec$/.test(u.pathname)}catch(_){return false}})();
+let scanner=null,scanning=false,loadPromise=null,queue=[],seenAt=new Map(),serial=0,activeCameraId='',torchOn=false;
+function status(msg,err=false){$('status').textContent=msg;$('status').style.background=err?'#ffe8e5':'#e6f4ed';}
+function render(){ $('count').textContent=queue.length;$('last').textContent=queue.length?queue[queue.length-1].barcode:'—';$('queue').replaceChildren();
+ if(!queue.length){const li=document.createElement('li');li.textContent='ยังไม่มีรายการ';$('queue').appendChild(li);return}
+ queue.slice().reverse().forEach((x,i)=>{const li=document.createElement('li');const a=document.createElement('span');a.textContent=x.barcode;const b=document.createElement('small');b.textContent=x.acked?'ส่งแล้ว':'รอส่ง';b.className=x.acked?'ok':'muted';li.append(a,b);$('queue').appendChild(li)});
+}
+function beep(){if($('sound').value==='no')return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const ctx=new C(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.frequency.value=900;gain.gain.value=.09;osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.09);osc.onended=()=>ctx.close()}catch(_){}}
+function addBarcode(value){const b=String(value||'').trim();if(!/^\d{6,14}$/.test(b)){status('อ่านรหัสแล้ว แต่ MiniMart รองรับบาร์โค้ดตัวเลข 6–14 หลักเท่านั้น',true);return}
+ const now=Date.now(),prior=seenAt.get(b)||0;if(now-prior<Number($('cooldown').value))return;
+ seenAt.set(b,now);if(queue.length>=50){status('ครบ 50 รายการ กรุณาส่งกลับ MiniMart ก่อน',true);return}
+ const item={barcode:b,id:String(++serial)+'-'+now,acked:false};queue.push(item);render();beep();try{navigator.vibrate?.(60)}catch(_){}
+ status('อ่านได้: '+b+' • เล็งรายการถัดไปได้เลย');
+ // Best effort instant delivery to the original POS tab. Mobile Safari may suspend it.
+ if(!/iPhone|iPad|iPod/.test(navigator.userAgent)&&window.opener&&token&&validTargets.includes(target))try{window.opener.postMessage({app:'MiniMartScanner',kind:'scan',token,target,barcode:b,id:item.id},'*')}catch(_){}
+}
+window.addEventListener('message',e=>{const d=e.data;if(!d||d.app!=='MiniMartScanner'||d.kind!=='ack'||d.token!==token||e.source!==window.opener)return;const item=queue.find(x=>x.id===d.id);if(item){item.acked=true;render()}});
+function loadLib(){if(window.Html5Qrcode)return Promise.resolve();if(loadPromise)return loadPromise;
+ loadPromise=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js';s.onload=()=>window.Html5Qrcode?resolve():reject(Error('ไม่พบตัวอ่านบาร์โค้ด'));s.onerror=()=>reject(Error('โหลดตัวอ่านรหัสไม่ได้ กรุณาตรวจสอบอินเทอร์เน็ต'));document.head.appendChild(s)}).catch(e=>{loadPromise=null;throw e});return loadPromise}
+async function start(){if(scanning)return;status('กำลังขออนุญาตกล้อง...');$('start').disabled=true;
+ try{if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia)throw Error('ต้องเปิดผ่าน HTTPS ใน Safari โดยตรง');
+ await loadLib();
+ scanner=new Html5Qrcode('reader',{formatsToSupport:[Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,Html5QrcodeSupportedFormats.UPC_A,Html5QrcodeSupportedFormats.UPC_E,Html5QrcodeSupportedFormats.CODE_128,Html5QrcodeSupportedFormats.CODE_39,Html5QrcodeSupportedFormats.ITF,Html5QrcodeSupportedFormats.QR_CODE],verbose:false});
+ const config={fps:15,qrbox:(w,h)=>({width:Math.max(180,Math.min(Math.round(w*.9),420)),height:Math.max(110,Math.min(Math.round(h*.5),220))}),disableFlip:true};
+ await scanner.start({facingMode:'environment'},config,addBarcode,()=>{});
+ scanning=true;status('กล้องพร้อม • สแกนได้ต่อเนื่อง');
+ $('torch').hidden=typeof scanner.applyVideoConstraints!=='function';
+ }catch(e){status('เปิดกล้องไม่ได้: '+(e?.message||e)+' • ลอง Safari โดยตรงและอนุญาตกล้อง',true);if(scanner){try{scanner.clear()}catch(_){}}scanner=null}
+ finally{$('start').disabled=false}
+}
+async function stop(){if(!scanner)return;try{if(scanning)await scanner.stop();scanner.clear()}catch(e){console.warn(e)}scanner=null;scanning=false;$('torch').hidden=true;status('หยุดกล้องแล้ว')}
+$('start').addEventListener('click',start);$('stop').addEventListener('click',stop);
+$('torch').addEventListener('click',async()=>{if(!scanner)return;try{torchOn=!torchOn;await scanner.applyVideoConstraints({advanced:[{torch:torchOn}]});status(torchOn?'เปิดไฟฉายแล้ว':'ปิดไฟฉายแล้ว')}catch(_){$('torch').hidden=true;status('อุปกรณ์นี้ไม่รองรับไฟฉายผ่านเว็บ')}});
+$('manualAdd').addEventListener('click',()=>{addBarcode($('manual').value);$('manual').value=''});
+$('manual').addEventListener('keydown',e=>{if(e.key==='Enter'){$('manualAdd').click()}});
+$('clear').addEventListener('click',()=>{if(!confirm('ล้างรายการที่สแกนทั้งหมด?'))return;queue=[];seenAt.clear();render();status('ล้างรายการแล้ว')});
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(queue.map(x=>x.barcode).join('\n'));status('คัดลอกรหัสแล้ว')}catch(_){status('คัดลอกอัตโนมัติไม่ได้ กรุณาคัดลอกด้วยตนเอง',true)}});
+$('send').addEventListener('click',()=>{
+ if(!allowedReturn||!validTargets.includes(target)){status('URL สำหรับกลับ MiniMart ไม่ถูกต้อง กรุณาเปิดจากปุ่มใน MiniMart',true);return}
+ if(!queue.length){status('ยังไม่มีรหัสที่จะส่งกลับ',true);return}
+ // Do not double-import scans that the POS already acknowledged.
+ const pending=queue.filter(x=>!x.acked).map(x=>x.barcode);
+ if(!pending.length){status('ส่งรหัสไปยัง MiniMart ครบแล้ว กลับไปดูหน้า POS เดิมได้เลย');try{window.opener?.focus();window.close()}catch(_){}return}
+ const url=new URL(returnUrl);if(target==='posBarcode'&&cartBase)url.searchParams.set('scanCartBase',cartBase);url.searchParams.set('scanTarget',target);url.searchParams.set('scanBatch',pending.join(','));url.searchParams.set('scanNonce',crypto.randomUUID?crypto.randomUUID():Date.now().toString(36));
+ // Navigate THIS tab, so it also works if Safari removed window.opener.
+ location.href=url.toString();
+});
+render();
+</script></body></html>
