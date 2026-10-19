@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Quick Scan v3.8.2</title>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#075f4b"><title>MiniMart Quick Scan v3.8.3</title>
 <style>
 :root{font-family:system-ui,-apple-system,'Noto Sans Thai',sans-serif;background:#f0f7f3;color:#153c32}*{box-sizing:border-box}body{margin:0}header{background:#075f4b;color:white;padding:16px 18px}h1{font-size:21px;margin:0}header small{opacity:.85}main{max-width:620px;margin:auto;padding:14px}.card{background:white;border:1px solid #d4e5db;border-radius:16px;padding:14px;margin:12px 0}button,a.btn{font:inherit;border:0;background:#08795e;color:white;padding:12px 15px;border-radius:10px;font-weight:650;cursor:pointer;text-decoration:none;display:inline-block}button.secondary{background:#e0efe7;color:#155544}button:disabled{opacity:.45}input,select{font:inherit;padding:11px;border:1px solid #bdd5c9;border-radius:9px;width:100%;min-width:0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}#reader{width:100%;min-height:180px;border-radius:12px;overflow:hidden;background:#12251d}#reader video{width:100%!important;object-fit:cover} .controls{padding:10px 0}.controls[hidden]{display:none}.tip{background:#fff8e8;border:1px solid #f1dfae;border-radius:9px;padding:10px;margin-top:10px;font-size:13px;color:#725413}#status{background:#e6f4ed;padding:12px;border-radius:9px;line-height:1.5}#queue{padding-left:0;list-style:none;max-height:210px;overflow:auto}#queue li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #edf3ef;padding:8px 0;font-variant-numeric:tabular-nums}.muted{color:#62786c;font-size:13px}.ok{color:#086d4c}.err{color:#b72d26}.big{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:20px;padding:4px 10px;background:#e1f2e9;color:#0c684c}footer{font-size:12px;color:#6b8275;padding:10px 16px;text-align:center}
 </style></head><body>
-<header><h1>📷 MiniMart — Quick Scan v3.8.2</h1><small>เปิดกล้องหลังอัตโนมัติ • เล็งแล้วอ่านทันที</small></header>
+<header><h1>📷 MiniMart — Quick Scan v3.8.3</h1><small>เปิดกล้องหลังอัตโนมัติ • โฟกัสก่อน • แฟลชช่วยเมื่อจำเป็น</small></header>
 <main>
 <div class="card"><div id="status" role="status">พร้อมเปิดกล้อง</div><div id="reader" style="margin-top:12px"></div>
-<div class="tip" id="modeTip">⚡ สแกนอัตโนมัติ: อ่านได้ทั้งกล่อง ขวดโค้ง และซองสะท้อนแสง โดยไม่ต้องเลือกโหมด • หากมีแสงสะท้อน ให้เอียงสินค้าเล็กน้อย</div>
+<div class="tip" id="modeTip">⚡ โหมดอัตโนมัติ: ใช้โฟกัสต่อเนื่องก่อน และเมื่อรอนานโดยยังไม่อ่านสำเร็จ จะลองเปิด–ปิดแฟลชสั้น ๆ เพียงหนึ่งครั้ง (เฉพาะกล้องที่รองรับ) • หากซองสะท้อนแสงให้เอียงเล็กน้อย</div>
 <div class="controls" id="zoomPanel" hidden><label for="zoom">🔎 ซูมกล้อง <b id="zoomValue">1.0×</b></label><input id="zoom" type="range" min="1" max="3" step="0.1" value="1" aria-label="ซูมกล้อง"></div>
-<div class="row" style="margin-top:12px"><button id="start">▶ เปิดกล้องอีกครั้ง</button><button id="switch" class="secondary">🔄 เปลี่ยนกล้อง</button><button id="stop" class="secondary">■ หยุด</button><button id="torch" class="secondary" hidden>🔦 ไฟฉาย</button></div>
+<div class="row" style="margin-top:12px"><button id="start">▶ เปิดกล้องอีกครั้ง</button><button id="switch" class="secondary">🔄 เปลี่ยนกล้อง</button><button id="stop" class="secondary">■ หยุด</button><button id="torch" class="secondary" hidden>🔦 ไฟฉาย</button><button id="refocus" class="secondary">🎯 ปรับกล้อง</button></div>
 <p class="muted">เล็งให้เห็นบาร์โค้ด EAN/UPC หรือ QR เต็มแถบ อ่านสำเร็จจะมีเสียง/สั่น และอ่านรายการถัดไปได้ทันที หากเป็นซองมันวาว ให้เอียงซองหนีแสงสะท้อนเล็กน้อย</p>
-<div class="row"><label style="flex:2">เว้นระยะรหัสเดิม (วินาที)<select id="cooldown"><option value="1800">1.8 — แนะนำ</option><option value="3000">3</option><option value="5000">5</option></select></label><label style="flex:1">เสียง<select id="sound"><option value="yes">เปิด</option><option value="no">ปิด</option></select></label></div>
+<div class="row" style="margin:8px 0"><label class="muted" style="display:flex;align-items:center;gap:8px"><input id="autoAssist" type="checkbox" checked style="width:auto;min-width:18px;height:18px"> ช่วยปรับกล้องอัตโนมัติเมื่ออ่านช้า (แฟลชเฉพาะเมื่อรองรับ)</label></div><div class="row"><label style="flex:2">เว้นระยะรหัสเดิม (วินาที)<select id="cooldown"><option value="1800">1.8 — แนะนำ</option><option value="3000">3</option><option value="5000">5</option></select></label><label style="flex:1">เสียง<select id="sound"><option value="yes">เปิด</option><option value="no">ปิด</option></select></label></div>
 </div>
 <div class="card"><div class="row"><div><div class="muted">อ่านล่าสุด</div><div id="last" class="big">—</div></div><div style="text-align:right"><span class="pill">สะสม <b id="count">0</b> รายการ</span></div></div>
 <div class="row" style="margin-top:12px"><input id="manual" inputmode="numeric" placeholder="กรอกรหัสเอง เช่น 8858894100472"><button id="manualAdd" style="flex:0 0 auto">+ เพิ่ม</button></div>
@@ -28,6 +28,7 @@ const token=params.get('token')||'',target=params.get('target')||'posBarcode',re
 const validTargets=['posBarcode','surveyBarcode','edBarcode','packBarcode','scannerTest','receiptBarcode'];
 const allowedReturn=(()=>{try{const u=new URL(returnUrl);return u.protocol==='https:'&&u.hostname==='script.google.com'&&/^\/macros\/s\/.+\/exec$/.test(u.pathname)}catch(_){return false}})();
 let scanner=null,scanning=false,starting=false,finishing=false,loadPromise=null,queue=[],seenAt=new Map(),serial=0,activeCameraId='',torchOn=false,cameraPreference='environment',zoomTimer=null;
+let assistTimer=null,assistBusy=false,assistUsedThisCycle=false,lastScanAt=0,assistSession=0,torchSupported=false,focusSupported=false;
 function status(msg,err=false){$('status').textContent=msg;$('status').style.background=err?'#ffe8e5':'#e6f4ed';}
 function render(){ $('count').textContent=queue.length;$('last').textContent=queue.length?queue[queue.length-1].barcode:'—';$('queue').replaceChildren();
  if(!queue.length){const li=document.createElement('li');li.textContent='ยังไม่มีรายการ';$('queue').appendChild(li);return}
@@ -41,7 +42,7 @@ function sendToExistingTab(item){
 function addBarcode(value){const b=String(value||'').trim();if(!/^\d{6,14}$/.test(b)){status('อ่านรหัสแล้ว แต่ MiniMart รองรับบาร์โค้ดตัวเลข 6–14 หลักเท่านั้น',true);return}
  const now=Date.now(),prior=seenAt.get(b)||0;if(now-prior<Number($('cooldown').value))return;
  seenAt.set(b,now);if(queue.length>=50){status('ครบ 50 รายการ กรุณาส่งกลับ MiniMart ก่อน',true);return}
- const item={barcode:b,id:String(++serial)+'-'+now,acked:false};queue.push(item);render();beep();try{navigator.vibrate?.(60)}catch(_){}
+ const item={barcode:b,id:String(++serial)+'-'+now,acked:false};queue.push(item);lastScanAt=now;assistUsedThisCycle=false;scheduleAssist();render();beep();try{navigator.vibrate?.(60)}catch(_){}
  status('อ่านได้: '+b+' • เล็งรายการถัดไปได้เลย');
  // Best effort instant delivery to the original POS tab. Mobile Safari may suspend it.
  sendToExistingTab(item);
@@ -72,24 +73,69 @@ async function start(){
    if(!choice)throw firstError;
    await scanner.start(choice.id,config,addBarcode,()=>{});
   }
-  scanning=true;status('กล้องพร้อม • สแกนต่อเนื่องได้เลย');
-  await configureCamera();
+  scanning=true;lastScanAt=Date.now();assistUsedThisCycle=false;status('กล้องพร้อม • สแกนต่อเนื่องได้เลย');
+  await configureCamera();scheduleAssist();
  }catch(e){status('เปิดกล้องไม่ได้: '+(e?.message||e)+' • กดเปิดกล้องอีกครั้ง หรืออนุญาตกล้องใน Safari',true);if(scanner){try{scanner.clear()}catch(_){}}scanner=null}
  finally{starting=false;$('start').disabled=false}
 }
-async function stop(){if(!scanner)return;try{if(scanning)await scanner.stop();scanner.clear()}catch(e){console.warn(e)}scanner=null;scanning=false;torchOn=false;$('torch').hidden=true;$('zoomPanel').hidden=true;status('หยุดกล้องแล้ว')}
+async function stop(){cancelAssist();assistSession++;if(!scanner)return;try{if(scanning)await scanner.stop();scanner.clear()}catch(e){console.warn(e)}scanner=null;scanning=false;torchOn=false;torchSupported=false;focusSupported=false;$('torch').hidden=true;$('zoomPanel').hidden=true;status('หยุดกล้องแล้ว')}
 
 function cameraCapabilities(){try{return scanner?.getRunningTrackCapabilities?.()||{}}catch(_){return {}}}
 async function applyCameraAdvanced(settings){if(!scanner||!scanning||typeof scanner.applyVideoConstraints!=='function')return false;try{await scanner.applyVideoConstraints({advanced:[settings]});return true}catch(_){return false}}
 async function configureCamera(){
  const caps=cameraCapabilities();
- $('torch').hidden=!(caps.torch===true && typeof scanner.applyVideoConstraints==='function');
+ torchSupported=caps.torch===true && typeof scanner.applyVideoConstraints==='function';
+ $('torch').hidden=!torchSupported;
  $('zoomPanel').hidden=!(caps.zoom&&Number.isFinite(caps.zoom.min)&&Number.isFinite(caps.zoom.max)&&caps.zoom.max>caps.zoom.min);
  if(!$('zoomPanel').hidden){const slider=$('zoom');slider.min=String(caps.zoom.min);slider.max=String(Math.min(caps.zoom.max,5));slider.step=String(caps.zoom.step||.1);const current=scanner.getRunningTrackSettings?.().zoom||caps.zoom.min;slider.value=String(Math.min(Number(slider.max),Math.max(Number(slider.min),current)));$('zoomValue').textContent=Number(slider.value).toFixed(1)+'×'}
- if(Array.isArray(caps.focusMode)&&caps.focusMode.includes('continuous'))await applyCameraAdvanced({focusMode:'continuous'});
+ focusSupported=Array.isArray(caps.focusMode)&&caps.focusMode.includes('continuous');
+ if(focusSupported)await applyCameraAdvanced({focusMode:'continuous'});
  // Do not force low exposure: it can make ordinary labels too dark.
  // Users can angle glossy packages away from the light.
 }
+// Each new barcode begins a fresh cycle. Try focus first; only if no successful
+// scan follows within ~2.2s, attempt one short torch pulse on supported cameras.
+// There is deliberately no perpetual flashing loop when the user is idle.
+function cancelAssist(){if(assistTimer!==null){clearTimeout(assistTimer);assistTimer=null}}
+function scheduleAssist(){
+ cancelAssist();if(!scanning||!$('autoAssist').checked||assistUsedThisCycle||finishing)return;
+ const session=assistSession;
+ assistTimer=setTimeout(()=>{assistTimer=null;if(session===assistSession)void runAutoAssist()},2200);
+}
+async function refocusOnly(){
+ if(!scanning||!scanner)return false;
+ // Continuous focus is a supported best-effort camera constraint; Safari may ignore it.
+ if(focusSupported)return await applyCameraAdvanced({focusMode:'continuous'});
+ return false;
+}
+async function torchPulse(session){
+ if(!torchSupported||torchOn||session!==assistSession||!scanning)return false;
+ // A short pulse can cause some devices to re-evaluate exposure/focus, but is
+ // not a guaranteed autofocus command. Never override the user's manual torch.
+ const turnedOn=await applyCameraAdvanced({torch:true});
+ if(!turnedOn)return false;
+ try{await new Promise(resolve=>setTimeout(resolve,160))}
+ finally{try{await applyCameraAdvanced({torch:false})}catch(_){}}
+ return true;
+}
+async function runAutoAssist(force=false){
+ if(!scanning||!scanner||assistBusy||finishing)return;
+ if(!force&&(!$('autoAssist').checked||assistUsedThisCycle||Date.now()-lastScanAt<2000))return;
+ assistBusy=true;assistUsedThisCycle=true;const session=assistSession;
+ try{
+  const focused=await refocusOnly();
+  if(session!==assistSession||!scanning)return;
+  // Wait for autofocus to settle and allow a barcode to be decoded first.
+  if(!force){await new Promise(resolve=>setTimeout(resolve,500));
+   if(session!==assistSession||!scanning||Date.now()-lastScanAt<2300)return;}
+  const pulsed=await torchPulse(session);
+  if(session!==assistSession||!scanning)return;
+  if(force)status(pulsed?'ปรับกล้องแล้ว • สแกนต่อได้เลย':focused?'ลองปรับโฟกัสแล้ว • เล็งบาร์โค้ดอีกครั้ง':'กล้องไม่รองรับการปรับโฟกัส/แฟลชผ่านเว็บ • ลองเอียงสินค้าเล็กน้อย');
+ }catch(e){console.warn('Auto assist unavailable',e)}
+ finally{assistBusy=false}
+}
+$('refocus').addEventListener('click',()=>{assistUsedThisCycle=false;cancelAssist();void runAutoAssist(true)});
+$('autoAssist').addEventListener('change',()=>{assistUsedThisCycle=false;if($('autoAssist').checked){lastScanAt=Date.now();scheduleAssist()}else cancelAssist()});
 $('zoom').addEventListener('input',e=>{const value=Number(e.target.value);$('zoomValue').textContent=value.toFixed(1)+'×';clearTimeout(zoomTimer);zoomTimer=setTimeout(()=>applyCameraAdvanced({zoom:value}),100)});
 $('start').addEventListener('click',start);$('stop').addEventListener('click',stop);$('switch').addEventListener('click',async()=>{cameraPreference=cameraPreference==='environment'?'user':'environment';await stop();await start()});
 $('torch').addEventListener('click',async()=>{if(!scanner)return;const desired=!torchOn;if(await applyCameraAdvanced({torch:desired})){torchOn=desired;status(torchOn?'เปิดไฟฉายแล้ว':'ปิดไฟฉายแล้ว')}else{$('torch').hidden=true;status('อุปกรณ์นี้ไม่รองรับไฟฉายผ่านเว็บ')}});
@@ -101,7 +147,7 @@ async function finishScan(){
  if(finishing)return;
  if(!allowedReturn||!validTargets.includes(target)){status('URL สำหรับกลับ MiniMart ไม่ถูกต้อง กรุณาเปิดจากปุ่มใน MiniMart',true);return}
  if(!queue.length){status('ยังไม่มีรหัสที่จะส่งกลับ',true);return}
- finishing=true;$('send').disabled=true;
+ finishing=true;cancelAssist();$('send').disabled=true;
  status('กำลังกลับ MiniMart...');
  // FAST PATH: existing POS tab already received each code and ACKed it.
  // Retry unacknowledged items once: Safari may briefly pause the original tab.
